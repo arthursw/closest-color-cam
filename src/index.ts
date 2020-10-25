@@ -40,7 +40,8 @@ let blue = '#448AFF'
 let green = '#8BC34A'
 let yellow = '#FFC107'
 // let brown = '#795548'
-let brown = '#006633'
+let brown = '#704433'
+// let brown = '#006633'
 let white = '#FFFFFF'
 let black = '#000000'
 let colors = [red, blue, green, yellow, brown, black, white]
@@ -100,7 +101,7 @@ function animate(timestamp: number = 0) {
 animate();
 
 // Prefer camera resolution nearest to 1280x720.
-var constraints = { audio: false, video: { width: 800, height: 600 } }; 
+var constraints = { audio: false, video: { facingMode: "environment" } }; 
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
