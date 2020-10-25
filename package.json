@@ -1,0 +1,21 @@
+{
+  "name": "simplethreets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html -d docs/",
+    "build": "parcel build index.html -d docs/"
+  },
+  "dependencies": {
+    "@types/dat.gui": "^0.7.5",
+    "dat.gui": "^0.7.7",
+    "three": "^0.114.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "parcel-bundler": "^1.6.1",
+    "typescript": "^4.0.3"
+  },
+  "keywords": []
+}
