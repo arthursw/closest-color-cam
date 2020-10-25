@@ -2,9 +2,12 @@ import * as THREE from "three";
 import * as dat from "dat.gui";
 import * as vertexShader from "./vertex";
 import * as fragmentShader from "./nchroma";
+import "screenlog";
 // import * as fragmentShader from "./fragment";
 import { FontLoader, Uniform } from "../dist/src.f10117fe";
+declare var screenLog: any;
 
+screenLog.init();
 let scene: THREE.Scene;
 let camera: THREE.OrthographicCamera;
 let renderer: THREE.WebGLRenderer;
