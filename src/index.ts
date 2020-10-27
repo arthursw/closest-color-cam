@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
 import * as vertexShader from "./vertex";
-import * as fragmentShader from "./nchroma";
+// import * as fragmentShader from "./nchroma";
+import * as fragmentShader from "./cameraShader";
 import "screenlog";
 // import * as fragmentShader from "./fragment";
 import { FontLoader, Uniform } from "../dist/src.f10117fe";
