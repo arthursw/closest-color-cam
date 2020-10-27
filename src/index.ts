@@ -65,14 +65,14 @@ let texture = new THREE.VideoTexture( video );
 
 material = new THREE.RawShaderMaterial({
   uniforms: {
-    applyColors: { type: "b", value: true },
-    screenResolution: { type: "v2", value: new THREE.Vector2(width, height) },
-    colors: { type: "v3v", value: colorVectorArray },
+    // applyColors: { type: "b", value: true },
+    // screenResolution: { type: "v2", value: new THREE.Vector2(width, height) },
+    // colors: { type: "v3v", value: colorVectorArray },
     textureSampler: { value: texture },
-    textureResolution: new THREE.Uniform(new THREE.Vector2(canvas ? canvas.height / 2 : 0, canvas ? canvas.width / 2 : 0)),
-    hue: {type: "f", value: preprocessing.hue},
-    saturation: {type: "f", value: preprocessing.saturation},
-    lightness: {type: "f", value: preprocessing.lightness},
+    // textureResolution: new THREE.Uniform(new THREE.Vector2(canvas ? canvas.height / 2 : 0, canvas ? canvas.width / 2 : 0)),
+    // hue: {type: "f", value: preprocessing.hue},
+    // saturation: {type: "f", value: preprocessing.saturation},
+    // lightness: {type: "f", value: preprocessing.lightness},
   },
   vertexShader: vertexShader.shader.trim(),
   fragmentShader: fragmentShader.shader.trim()
@@ -121,10 +121,10 @@ navigator.mediaDevices.getUserMedia(constraints)
 // window.addEventListener('click', ()=> material.)
 
 
-var gui = new dat.GUI();
+// var gui = new dat.GUI();
 
-let preprocessingFolder = gui.addFolder('Preprocessing');
+// let preprocessingFolder = gui.addFolder('Preprocessing');
 
-preprocessingFolder.add(preprocessing, 'hue', 0, 1, 0.01).onChange( (value: number)=> material.uniforms.hue.value = value );
-preprocessingFolder.add(preprocessing, 'saturation', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.saturation.value = value );
-preprocessingFolder.add(preprocessing, 'lightness', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.lightness.value = value );
+// preprocessingFolder.add(preprocessing, 'hue', 0, 1, 0.01).onChange( (value: number)=> material.uniforms.hue.value = value );
+// preprocessingFolder.add(preprocessing, 'saturation', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.saturation.value = value );
+// preprocessingFolder.add(preprocessing, 'lightness', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.lightness.value = value );
