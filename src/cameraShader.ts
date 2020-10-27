@@ -1,7 +1,7 @@
 export let shader = `#version 300 es
 #define MAX_BUFFER_SIZE 1000
 
-precision highp float;
+precision mediump float;
 	
 uniform float time;
 uniform bool applyColors;
