@@ -5,3 +5,7 @@ body {
 video {
   display: none;
 }
+.dg.ac .dg.main {
+  position: absolute;
+  left: 0;
+}
