@@ -5,7 +5,7 @@ import * as fragmentShader from "./nchroma";
 // import * as fragmentShader from "./cameraShader";
 import "screenlog";
 // import * as fragmentShader from "./fragment";
-import { FontLoader, Uniform } from "../dist/src.f10117fe";
+import { EqualStencilFunc, FontLoader, PlaneHelper, Uniform } from "../dist/src.f10117fe";
 declare var screenLog: any;
 
 screenLog.init();
@@ -126,13 +126,44 @@ navigator.mediaDevices.getUserMedia(constraints)
 })
 .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
 
-// window.addEventListener('click', ()=> material.)
-
 
 var gui = new dat.GUI();
 
 let preprocessingFolder = gui.addFolder('Preprocessing');
 
-preprocessingFolder.add(preprocessing, 'hue', 0, 1, 0.01).onChange( (value: number)=> material.uniforms.hue.value = value );
-preprocessingFolder.add(preprocessing, 'saturation', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.saturation.value = value );
-preprocessingFolder.add(preprocessing, 'lightness', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.lightness.value = value );
+let hueController = preprocessingFolder.add(preprocessing, 'hue', 0, 1, 0.01).onChange( (value: number)=> material.uniforms.hue.value = value );
+let saturationController = preprocessingFolder.add(preprocessing, 'saturation', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.saturation.value = value );
+let lightnessController = preprocessingFolder.add(preprocessing, 'lightness', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.lightness.value = value );
+
+let dragging = false
+
+function changePreprocessing(event: MouseEvent | TouchEvent){
+  if(!dragging && event instanceof MouseEvent) {
+    return
+  }
+  let point = {x: 0, y: 0}
+  if(event instanceof TouchEvent) {
+    point.x = event.touches[0].pageX
+    point.y = event.touches[0].pageY
+  } else {
+    point.x = event.pageX
+    point.y = event.pageY
+  }
+  point.x /= window.innerWidth
+  point.y /= window.innerHeight
+
+  if(point.y < 1/3) {
+    hueController.setValue(point.x)
+  }
+  else if(point.y < 2/3) {
+    saturationController.setValue(point.x)
+  }
+  else if(point.y < 3/3) {
+    lightnessController.setValue(point.x)
+  }
+}
+
+window.addEventListener('touchmove', changePreprocessing)
+window.addEventListener('mousedown', ()=> dragging = true)
+window.addEventListener('mousemove', changePreprocessing)
+window.addEventListener('mouseup', ()=> dragging = true)
