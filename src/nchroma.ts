@@ -224,5 +224,6 @@ void main() {
 	// float y = mod(vUv.y, 0.2) < 0.1 ? 1. : 0.;
     float n = 10.0;
     float i = 1.0 / n;
-    fragColor = mod(vUv.y, i) < 0.5 * i ? vec4(color, 1.0) : pixel;
+    // fragColor = mod(vUv.y, i) < 0.5 * i ? vec4(color, 1.0) : pixel;
+    fragColor = vec4(color, 1.0);
 }`;

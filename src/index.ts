@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
 import * as vertexShader from "./vertex";
-// import * as fragmentShader from "./nchroma";
-import * as fragmentShader from "./cameraShader";
+import * as fragmentShader from "./nchroma";
+// import * as fragmentShader from "./cameraShader";
 import "screenlog";
 // import * as fragmentShader from "./fragment";
 import { FontLoader, Uniform } from "../dist/src.f10117fe";
@@ -31,8 +31,11 @@ function scene_setup() {
     canvas: canvas,
     context: context
   } as any);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  // renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(100, 50)
+  renderer.setPixelRatio(1)
+  canvas.style.width = '100%'
+  canvas.style.height = '100%'
   document.body.appendChild(renderer.domElement);
   return scene;
 }
@@ -62,17 +65,19 @@ let height = window.innerHeight
 let video: HTMLVideoElement = document.querySelector('video') as any;
 
 let texture = new THREE.VideoTexture( video );
+texture.minFilter = THREE.NearestFilter
+texture.magFilter = THREE.NearestFilter
 
 material = new THREE.RawShaderMaterial({
   uniforms: {
-    // applyColors: { type: "b", value: true },
+    applyColors: { type: "b", value: true },
     // screenResolution: { type: "v2", value: new THREE.Vector2(width, height) },
-    // colors: { type: "v3v", value: colorVectorArray },
+    colors: { type: "v3v", value: colorVectorArray },
     textureSampler: { value: texture },
     // textureResolution: new THREE.Uniform(new THREE.Vector2(canvas ? canvas.height / 2 : 0, canvas ? canvas.width / 2 : 0)),
-    // hue: {type: "f", value: preprocessing.hue},
-    // saturation: {type: "f", value: preprocessing.saturation},
-    // lightness: {type: "f", value: preprocessing.lightness},
+    hue: {type: "f", value: preprocessing.hue},
+    saturation: {type: "f", value: preprocessing.saturation},
+    lightness: {type: "f", value: preprocessing.lightness},
   },
   vertexShader: vertexShader.shader.trim(),
   fragmentShader: fragmentShader.shader.trim()
@@ -86,7 +91,10 @@ scene.add(sprite);
 window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize() {
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(100, 50)
+  renderer.setPixelRatio(1)
+  canvas.style.width = '100%'
+  canvas.style.height = '100%'
   /*
   camera.left = -0.5 * screenWidth;
   camera.right = 0.5 * screenWidth;
@@ -105,7 +113,7 @@ function animate(timestamp: number = 0) {
 animate();
 
 // Prefer camera resolution nearest to 1280x720.
-var constraints = { audio: false, video: { facingMode: "environment" } }; 
+var constraints = { audio: false, video: { facingMode: "environment", width: 100, height: 50 } }; 
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
@@ -121,10 +129,10 @@ navigator.mediaDevices.getUserMedia(constraints)
 // window.addEventListener('click', ()=> material.)
 
 
-// var gui = new dat.GUI();
+var gui = new dat.GUI();
 
-// let preprocessingFolder = gui.addFolder('Preprocessing');
+let preprocessingFolder = gui.addFolder('Preprocessing');
 
-// preprocessingFolder.add(preprocessing, 'hue', 0, 1, 0.01).onChange( (value: number)=> material.uniforms.hue.value = value );
-// preprocessingFolder.add(preprocessing, 'saturation', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.saturation.value = value );
-// preprocessingFolder.add(preprocessing, 'lightness', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.lightness.value = value );
+preprocessingFolder.add(preprocessing, 'hue', 0, 1, 0.01).onChange( (value: number)=> material.uniforms.hue.value = value );
+preprocessingFolder.add(preprocessing, 'saturation', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.saturation.value = value );
+preprocessingFolder.add(preprocessing, 'lightness', -1, 1, 0.01).onChange( (value: number)=> material.uniforms.lightness.value = value );

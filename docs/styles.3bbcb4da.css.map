@@ -1,1 +1,0 @@
-{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,KACE,QAAS,CACT,eACF,CACA,MACE,YACF,CACA,gBACE,iBAAkB,CAClB,MACF","file":"styles.3bbcb4da.css","sourceRoot":"..","sourcesContent":["body {\n  margin: 0;\n  overflow: hidden;\n}\nvideo {\n  display: none;\n}\n.dg.ac .dg.main {\n  position: absolute;\n  left: 0;\n}"]}
