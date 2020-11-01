@@ -32,7 +32,7 @@ function scene_setup() {
     context: context
   } as any);
   // renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(100, 50)
+  renderer.setSize(200, 100)
   renderer.setPixelRatio(1)
   canvas.style.width = '100%'
   canvas.style.height = '100%'
@@ -91,7 +91,7 @@ scene.add(sprite);
 window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize() {
-  renderer.setSize(100, 50)
+  renderer.setSize(200, 100)
   renderer.setPixelRatio(1)
   canvas.style.width = '100%'
   canvas.style.height = '100%'
