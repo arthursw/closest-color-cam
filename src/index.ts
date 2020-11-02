@@ -17,8 +17,8 @@ let material: THREE.RawShaderMaterial;
 let canvas = document.createElement("canvas");
 let preprocessing = { hue: 0.0, saturation: 0.0, lightness: 0.0 };
 
-let width = Math.floor(window.innerWidth / 4)
-let height = Math.floor(window.innerHeight / 4)
+let width = Math.floor(window.innerHeight / 4)
+let height = Math.floor(window.innerWidth / 4)
 
 function scene_setup() {
   //This is all code needed to set up a basic ThreeJS scene
@@ -91,8 +91,8 @@ scene.add(sprite);
 window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize() {
-  width = window.innerWidth / 4
-  height = window.innerHeight / 4
+  width = window.innerHeight / 4
+  height = window.innerWidth / 4
   renderer.setSize(width, height)
   renderer.setPixelRatio(1)
   canvas.style.width = '100%'
