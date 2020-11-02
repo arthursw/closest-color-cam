@@ -17,6 +17,9 @@ let material: THREE.RawShaderMaterial;
 let canvas = document.createElement("canvas");
 let preprocessing = { hue: 0.0, saturation: 0.0, lightness: 0.0 };
 
+let width = Math.floor(window.innerWidth / 4)
+let height = Math.floor(window.innerHeight / 4)
+
 function scene_setup() {
   //This is all code needed to set up a basic ThreeJS scene
   //First we initialize the scene and our camera
@@ -32,7 +35,7 @@ function scene_setup() {
     context: context
   } as any);
   // renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(200, 100)
+  renderer.setSize(width, height)
   renderer.setPixelRatio(1)
   canvas.style.width = '100%'
   canvas.style.height = '100%'
@@ -58,9 +61,6 @@ for(let color of colors) {
   let c = new THREE.Color(color)
   colorVectorArray.push(new THREE.Vector3(c.r, c.g, c.b))
 }
-
-let width = window.innerWidth
-let height = window.innerHeight
 
 let video: HTMLVideoElement = document.querySelector('video') as any;
 
@@ -91,7 +91,9 @@ scene.add(sprite);
 window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize() {
-  renderer.setSize(200, 100)
+  width = window.innerWidth / 4
+  height = window.innerHeight / 4
+  renderer.setSize(width, height)
   renderer.setPixelRatio(1)
   canvas.style.width = '100%'
   canvas.style.height = '100%'
@@ -113,7 +115,7 @@ function animate(timestamp: number = 0) {
 animate();
 
 // Prefer camera resolution nearest to 1280x720.
-var constraints = { audio: false, video: { facingMode: "environment", width: 100, height: 50 } }; 
+var constraints = { audio: false, video: { facingMode: "environment", width: width, height: height } }; 
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
